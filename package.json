@@ -1,22 +1,45 @@
 {
-	"name": "demoRN",
-	"version": "0.0.1",
-	"private": true,
-	"scripts": {
-		"start": "node node_modules/react-native/local-cli/cli.js start",
-		"test": "jest"
-	},
-	"dependencies": {
-		"react": "16.0.0",
-		"react-native": "0.50.4"
-	},
-	"devDependencies": {
-		"babel-jest": "21.2.0",
-		"babel-preset-react-native": "4.0.0",
-		"jest": "21.2.1",
-		"react-test-renderer": "16.0.0"
-	},
-	"jest": {
-		"preset": "react-native"
-	}
+  "name": "demos-rn",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "apollo-client-preset": "^1.0.4",
+    "formik": "^0.10.5",
+    "graphql": "^0.11.7",
+    "graphql-tag": "^2.5.0",
+    "native-base": "^2.3.3",
+    "react": "16.0.0",
+    "react-apollo": "^2.0.1",
+    "react-native": "0.50.4",
+    "react-native-router-flux": "^4.0.0-beta.24",
+    "react-navigation": "^1.0.0-beta.21",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "yup": "^0.23.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.0.3",
+    "babel-jest": "21.2.0",
+    "babel-preset-react-native": "4.0.0",
+    "eslint": "^4.12.1",
+    "eslint-config-react-app": "^2.0.1",
+    "eslint-loader": "^1.9.0",
+    "eslint-plugin-flowtype": "^2.39.1",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.5.1",
+    "jest": "21.2.1",
+    "react-test-renderer": "16.0.0",
+    "redux-devtools-extension": "^2.13.2"
+  },
+  "jest": {
+    "preset": "react-native"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  }
 }
