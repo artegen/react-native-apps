@@ -13,6 +13,10 @@ import {
   Lightbox,
 } from 'react-native-router-flux';
 
+import Register from './templates/views/Register';
+import Login from './templates/views/Login';
+import Profile from './templates/views/Profile';
+
 const reducerCreate = params => {
   const defaultReducer = new Reducer(params);
   return (state, action) => {
@@ -38,12 +42,7 @@ export default () => (
   >
     <Stack back backTitle="Back" key="register" duration={0}>
       <Scene key="_register" component={Register} title="Register" />
-      <Scene
-        key="home"
-        component={Home}
-        title="Replace"
-        type={ActionConst.REPLACE}
-      />
+      <Scene key="login" component={Login} title="Login" />
     </Stack>
   </Router>
 );

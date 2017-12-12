@@ -1,91 +1,12 @@
-import React, { Component } from 'react';
 import gql from 'graphql-tag';
-import { graphql } from 'react-apollo'; // 2.0.1
-// import 'apollo-client';
-// import 'graphql';
+import { graphql } from 'react-apollo';
 
 import { withFormik } from 'formik';
 import yup from 'yup';
-import {
-  Container,
-  Button,
-  Content,
-  Form,
-  Item,
-  Label,
-  Input,
-  Text,
-} from 'native-base';
-import { StyleSheet } from 'react-native';
 
-const RegisterForm = props => {
-  const {
-    values,
-    touched,
-    errors,
-    setFieldValue,
-    isSubmitting,
-    handleBlur,
-    handleSubmit,
-  } = props;
-  return (
-    <Container>
-      <Content>
-        <Form>
-          <Item
-            floatingLabel
-            error={!!errors.email || (touched.email && !!!values.email)}
-          >
-            <Label>Email</Label>
-            <Input
-              // placeholder="Email"
-              value={values.email}
-              onChangeText={value => setFieldValue('email', value)}
-              onBlur={handleBlur}
-              keyboardType="email-address"
-              autoCapitalize="none"
-              autoCorrect={false}
-            />
-            {!!errors.email &&
-              touched.email && <Text style={s.error}>{errors.email}</Text>}
-          </Item>
-          <Item floatingLabel error={!!errors.password}>
-            <Label>Password</Label>
-            <Input
-              // placeholder="Password"
-              value={values.password}
-              onChangeText={value => setFieldValue('password', value)}
-              onBlur={handleBlur}
-              autoCapitalize="none"
-              autoCorrect={false}
-              secureTextEntry
-            />
-            {!!errors.password &&
-              touched.password && (
-                <Text style={s.error}>{errors.password}</Text>
-              )}
-          </Item>
-        </Form>
-        <Button full onPress={handleSubmit} disabled={isSubmitting}>
-          <Text>Sign Up</Text>
-        </Button>
-        <Button full transparent onPress={() => navigation.navigate('Login')}>
-          <Text>Sign In</Text>
-        </Button>
-      </Content>
-    </Container>
-  );
-};
+import RegisterForm from './registerForm';
 
-const s = StyleSheet.create({
-  error: {
-    color: '#ff190c',
-    fontSize: 12,
-    marginTop: 6,
-  },
-});
-
-const EnhancedForm = withFormik({
+const formOptions = {
   // Transform outer props into form values
   mapPropsToValues: props => ({ email: '', password: '' }),
   validationSchema: yup.object().shape({
@@ -141,7 +62,9 @@ const EnhancedForm = withFormik({
     );
   },
   // displayName: 'BasicForm', // helps with React DevTools
-})(RegisterForm);
+};
+
+const EnhancedForm = withFormik(formOptions)(RegisterForm);
 
 export default graphql(
   gql`

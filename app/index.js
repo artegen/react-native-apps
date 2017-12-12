@@ -1,60 +1,41 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
-import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { StyleSheet } from 'react-native';
 
 import { ApolloClient, HttpLink, InMemoryCache } from 'apollo-client-preset';
-import gql from 'graphql-tag';
-import { ApolloProvider, graphql } from 'react-apollo';
+import { ApolloProvider } from 'react-apollo';
+import { setContext } from 'apollo-link-context';
 
 import { Provider, connect } from 'react-redux';
 import configureStore from './storeConfig';
 
 import Routes from './router';
+import { signIn, signOut, getToken } from './util';
+import Auth from './components/auth/Auth';
+
+const httpLink = new HttpLink({ uri: 'https://q815p14lp.lp.gql.zone/graphql' });
+const authLink = setContext(async (req, { headers }) => {
+  const token = await getToken();
+
+  return {
+    ...headers,
+    authorization: token ? `Bearer ${token}` : null,
+  };
+});
+const link = authLink.concat(httpLink);
 
 const client = new ApolloClient({
-  link: new HttpLink({ uri: 'https://q815p14lp.lp.gql.zone/graphql' }),
+  link,
   cache: new InMemoryCache(),
 });
 
 const store = configureStore();
 
-const App = () => (
-  <ApolloProvider client={client}>
-    <Routes />
-  </ApolloProvider>
+export default () => (
+  <Provider store={store}>
+    <ApolloProvider client={client}>
+      <Auth>
+        <Routes />
+      </Auth>
+    </ApolloProvider>
+  </Provider>
 );
-
-export default () => {
-  const AppWithStore = connect(
-    ({ loggedIn }) => ({
-      loggedIn,
-    })
-    // null,
-    // null,
-    // { withRef: true }
-  )(App);
-  return (
-    <Provider store={store}>
-      <AppWithStore />
-    </Provider>
-  );
-};
-
-const s = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-});
