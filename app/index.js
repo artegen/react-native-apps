@@ -1,16 +1,14 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
 
 import { ApolloClient, HttpLink, InMemoryCache } from 'apollo-client-preset';
 import { ApolloProvider } from 'react-apollo';
 import { setContext } from 'apollo-link-context';
 
-import { Provider, connect } from 'react-redux';
+import { Provider } from 'react-redux';
 import configureStore from './storeConfig';
 
 import Routes from './router';
-import { signIn, signOut, getToken } from './util';
-import Auth from './components/auth/Auth';
+import { getToken } from './util';
 
 const httpLink = new HttpLink({ uri: 'https://q815p14lp.lp.gql.zone/graphql' });
 const authLink = setContext(async (req, { headers }) => {
@@ -33,9 +31,7 @@ const store = configureStore();
 export default () => (
   <Provider store={store}>
     <ApolloProvider client={client}>
-      <Auth>
-        <Routes />
-      </Auth>
+      <Routes />
     </ApolloProvider>
   </Provider>
 );

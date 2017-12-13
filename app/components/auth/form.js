@@ -11,7 +11,7 @@ import {
   Input,
   Text,
 } from 'native-base';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TouchableHighlight } from 'react-native';
 
 export default props => {
   const {
@@ -22,6 +22,7 @@ export default props => {
     isSubmitting,
     handleBlur,
     handleSubmit,
+    signIn = true,
   } = props;
   return (
     <Container>
@@ -61,12 +62,16 @@ export default props => {
               )}
           </Item>
         </Form>
+
         <Button full onPress={handleSubmit} disabled={isSubmitting}>
-          <Text>Sign Up</Text>
+          {signIn ? <Text>Sign In</Text> : <Text>Sign Up</Text>}
         </Button>
-        <Button full transparent onPress={Actions.login}>
-          <Text>Sign In</Text>
-        </Button>
+        <TouchableHighlight
+          style={s.link}
+          onPress={signIn ? Actions.register : Actions.login}
+        >
+          <Text style={s.linkText}>{signIn ? 'Sign Up' : 'Sign In'}</Text>
+        </TouchableHighlight>
       </Content>
     </Container>
   );
@@ -77,5 +82,12 @@ const s = StyleSheet.create({
     color: '#ff190c',
     fontSize: 12,
     marginTop: 6,
+  },
+  link: {
+    padding: 5,
+  },
+  linkText: {
+    color: '#ff190c',
+    letterSpacing: 1.3,
   },
 });
