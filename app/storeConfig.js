@@ -1,8 +1,8 @@
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension/logOnlyInProduction';
 
-import * as reducers from './reducers';
-import * as actionCreators from './storeActions';
+import * as reducers from './store/reducers';
+import * as actionCreators from './store/actions';
 
 export default preLoadedState => {
   const rootReducer = combineReducers({ ...reducers });

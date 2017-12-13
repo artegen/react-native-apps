@@ -20,7 +20,7 @@ export default props => {
     errors,
     setFieldValue,
     isSubmitting,
-    handleBlur,
+    // handleBlur,
     handleSubmit,
     signIn = true,
   } = props;
@@ -37,7 +37,7 @@ export default props => {
               // placeholder="Email"
               value={values.email}
               onChangeText={value => setFieldValue('email', value)}
-              onBlur={handleBlur}
+              // onBlur={handleBlur}
               keyboardType="email-address"
               autoCapitalize="none"
               autoCorrect={false}
@@ -51,7 +51,7 @@ export default props => {
               // placeholder="Password"
               value={values.password}
               onChangeText={value => setFieldValue('password', value)}
-              onBlur={handleBlur}
+              // onBlur={handleBlur}
               autoCapitalize="none"
               autoCorrect={false}
               secureTextEntry
