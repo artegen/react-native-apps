@@ -15,22 +15,20 @@ export const formOptionsLogin = () => ({
     //   /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
     //   'There must be a mistake, please check once more'
     // ),
-    password: yup
-      .string()
-      .test({
-        name: 'min',
-        message: 'The password must be at least 8 characters',
-        // can be async
-        test: ({ password }) => password == null || password.length < 8,
-      })
-      .test({
-        name: 'alphanum',
-        message: 'The password must contain low/uppercase letters and numbers',
-        test: ({ password }) =>
-          !/\w+/.test(password) ||
-          !/[A-Z]/.test(password) ||
-          !/\d/.test(password),
-      }),
+    // password: yup.string().test({
+    //   name: 'min',
+    //   message: 'The password must be at least 8 characters',
+    //   // can be async
+    //   test: ({ password }) => password == null || password.length < 8,
+    // }),
+    // .test({
+    //   name: 'alphanum',
+    //   message: 'The password must contain low/uppercase letters and numbers',
+    //   test: ({ password }) =>
+    //     !/\w+/.test(password) ||
+    //     !/[A-Z]/.test(password) ||
+    //     !/\d/.test(password),
+    // }),
   }),
   handleSubmit: (
     { email, password },

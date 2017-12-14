@@ -24,13 +24,15 @@ export default props => {
     handleSubmit,
     signIn = true,
   } = props;
+  console.log({ props });
+
   return (
     <Container>
       <Content>
         <Form>
           <Item
             floatingLabel
-            error={!!errors.email || (touched.email && !!!values.email)}
+            // error={!!errors.email || (touched.email && !!!values.email)}
           >
             <Label>Email</Label>
             <Input
@@ -42,10 +44,10 @@ export default props => {
               autoCapitalize="none"
               autoCorrect={false}
             />
-            {!!errors.email &&
-              touched.email && <Text style={s.error}>{errors.email}</Text>}
+            {/* {!!errors.email &&
+              touched.email && <Text style={s.error}>{errors.email}</Text>} */}
           </Item>
-          <Item floatingLabel error={!!errors.password}>
+          {/* <Item floatingLabel error={!!errors.password}>
             <Label>Password</Label>
             <Input
               // placeholder="Password"
@@ -60,7 +62,7 @@ export default props => {
               touched.password && (
                 <Text style={s.error}>{errors.password}</Text>
               )}
-          </Item>
+          </Item> */}
         </Form>
 
         <Button full onPress={handleSubmit} disabled={isSubmitting}>

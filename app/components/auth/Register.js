@@ -11,8 +11,8 @@ const formOptions = formOptionsRegister();
 
 const EnhancedForm = () => (
   <Formik
-    {...{ formOptions }}
-    render={props => <Form props signIn={false} />}
+    {...formOptions}
+    render={props => <Form {...props} signIn={false} />}
   />
 );
 

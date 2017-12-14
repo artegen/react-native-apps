@@ -34,19 +34,19 @@ export default () => (
       })}
       // titleStyle={{ alignSelf: 'center' }}
     >
-      <Modal>
-        <Stack key="app">
-          <Scene key="app_main" component={App} initial />
-        </Stack>
+      {/* <Modal> */}
+      <Stack key="app">
+        <Scene key="app_main" component={App} initial />
+      </Stack>
 
-        <Stack key="auth">
-          {/* Being second part wrapped in a modal this shows up in a modal view */}
-          <Scene key="login" initial component={Login} title="Login" />
-          <Scene key="register" component={Register} title="Register" />
-        </Stack>
+      <Stack key="auth">
+        {/* Being second part wrapped in a modal this shows up in a modal view */}
+        <Scene key="login" initial component={Login} title="Login" />
+        <Scene key="register" component={Register} title="Register" />
+      </Stack>
 
-        {/* <Scene key="error" component={ErrorModal} /> */}
-      </Modal>
+      {/* <Scene key="error" component={ErrorModal} /> */}
+      {/* </Modal> */}
     </Stack>
   </Router>
 );
