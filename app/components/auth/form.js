@@ -11,7 +11,7 @@ import {
   Input,
   Text,
 } from 'native-base';
-import { StyleSheet, TouchableHighlight } from 'react-native';
+import { StyleSheet, TouchableHighlight, View, TextInput } from 'react-native';
 
 export default props => {
   const {
@@ -20,11 +20,13 @@ export default props => {
     errors,
     setFieldValue,
     isSubmitting,
-    // handleBlur,
+    setFieldTouched,
     handleSubmit,
     signIn = true,
   } = props;
+
   console.log({ props });
+  // smth is triggering 1 additional re-render. Router?
 
   return (
     <Container>
@@ -32,37 +34,35 @@ export default props => {
         <Form>
           <Item
             floatingLabel
-            // error={!!errors.email || (touched.email && !!!values.email)}
+            error={!!errors.email || (touched.email && !!!values.email)} //check
           >
             <Label>Email</Label>
             <Input
               // placeholder="Email"
               value={values.email}
               onChangeText={value => setFieldValue('email', value)}
-              // onBlur={handleBlur}
+              onBlur={() => setFieldTouched('email', true)}
               keyboardType="email-address"
               autoCapitalize="none"
               autoCorrect={false}
             />
-            {/* {!!errors.email &&
-              touched.email && <Text style={s.error}>{errors.email}</Text>} */}
           </Item>
-          {/* <Item floatingLabel error={!!errors.password}>
+          {!!errors.email &&
+            touched.email && <Text style={s.error}>{errors.email}</Text>}
+          <Item floatingLabel error={!!errors.password}>
             <Label>Password</Label>
             <Input
               // placeholder="Password"
               value={values.password}
               onChangeText={value => setFieldValue('password', value)}
-              // onBlur={handleBlur}
+              onBlur={() => setFieldTouched('password', true)}
               autoCapitalize="none"
               autoCorrect={false}
               secureTextEntry
             />
-            {!!errors.password &&
-              touched.password && (
-                <Text style={s.error}>{errors.password}</Text>
-              )}
-          </Item> */}
+          </Item>
+          {!!errors.password &&
+            touched.password && <Text style={s.error}>{errors.password}</Text>}
         </Form>
 
         <Button full onPress={handleSubmit} disabled={isSubmitting}>
