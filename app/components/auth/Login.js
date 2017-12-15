@@ -4,9 +4,9 @@ import { graphql } from 'react-apollo';
 import { withFormik } from 'formik';
 
 import Form from './form';
-import { formOptionsLogin } from './formOptions';
+import createFormOptions from './formOptions';
 
-const formOptions = formOptionsLogin();
+const formOptions = createFormOptions();
 const EnhancedForm = withFormik(formOptions)(Form);
 
 export default graphql(

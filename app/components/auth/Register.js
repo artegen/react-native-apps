@@ -2,19 +2,22 @@ import React from 'react';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 
-import { Formik } from 'formik';
+import { withFormik } from 'formik';
 
 import Form from './form';
-import { formOptionsRegister } from './formOptions';
+import createFormOptions from './formOptions';
 
-const formOptions = formOptionsRegister();
+const signInForm = false;
+const formOptions = createFormOptions(signInForm);
+const signUpForm = props => <Form {...props} signIn={signInForm} />;
+const EnhancedForm = withFormik(formOptions)(signUpForm);
 
-const EnhancedForm = () => (
-  <Formik
-    {...formOptions}
-    render={props => <Form {...props} signIn={false} />}
-  />
-);
+// const EnhancedForm = () => (
+//   <Formik
+//     {...formOptions}
+//     render={props => <Form {...props} signIn={false} />}
+//   /> // overrides props, losing set values
+// );
 
 export default graphql(
   gql`
