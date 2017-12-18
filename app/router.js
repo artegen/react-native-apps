@@ -20,7 +20,7 @@ const getSceneStyle = () => ({
   shadowRadius: 3,
 });
 
-// avoid flash of content at first load
+// avoid flash of content at first load - remove Stack wrappers
 export default () => (
   <Router
     createReducer={reducerCreate}
@@ -29,22 +29,22 @@ export default () => (
   >
     <Stack
       key="root"
-      hideNavBar
+      // hideNavBar
       transitionConfig={() => ({
         screenInterpolator: CardStackStyleInterpolator.forFadeFromBottomAndroid,
       })}
       // titleStyle={{ alignSelf: 'center' }}
     >
       {/* <Modal> */}
-      <Stack key="app">
-        <Scene key="app_main" component={App} initial />
-      </Stack>
+      {/* <Stack key="app"> */}
+      <Scene key="app" component={App} />
+      {/* </Stack> */}
 
-      <Stack key="auth">
-        {/* Being second part wrapped in a modal this shows up in a modal view */}
-        <Scene key="login" initial component={Login} title="Login" />
-        <Scene key="register" component={Register} title="Register" />
-      </Stack>
+      {/* <Stack key="auth"> */}
+      {/* Being second part wrapped in a modal this shows up in a modal view */}
+      <Scene key="login" initial component={Login} title="Login" />
+      <Scene key="register" component={Register} title="Register" />
+      {/* </Stack> */}
 
       {/* <Scene key="error" component={ErrorModal} /> */}
       {/* </Modal> */}

@@ -25,8 +25,8 @@ export default props => {
     signIn = true,
   } = props;
 
-  console.log({ props });
-  // smth is triggering 1 additional re-render. Router? When pushing a route it only renders once, but when interacting with controls it logs twice at every event.
+  // console.log({ props });
+  // form callbacks trigger additional re-renders, usually 1 more - the event handle and validation or error display
 
   return (
     <Container>
@@ -34,7 +34,7 @@ export default props => {
         <Form>
           <Item
             floatingLabel
-            error={!!errors.email || (touched.email && !!!values.email)} //check
+            error={!!errors.email || (touched.email && !!!values.email)}
           >
             <Label>Email</Label>
             <Input
