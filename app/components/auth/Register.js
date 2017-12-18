@@ -12,17 +12,11 @@ const formOptions = createFormOptions(signInForm);
 const signUpForm = props => <Form {...props} signIn={signInForm} />;
 const EnhancedForm = withFormik(formOptions)(signUpForm);
 
-// const EnhancedForm = () => (
-//   <Formik
-//     {...formOptions}
-//     render={props => <Form {...props} signIn={false} />}
-//   /> // overrides props, losing set values
-// );
-
 export default graphql(
+  // signup method is defined on the server
   gql`
     mutation SignUp($email: String!, $password: String!) {
-      signUp(email: $email, password: $password) {
+      signup(email: $email, password: $password) {
         _id
         email
         jwt
@@ -31,7 +25,7 @@ export default graphql(
   `,
   {
     props: ({ mutate }) => ({
-      signUp: (email, password) => mutate({ variables: { email, password } }),
+      signup: (email, password) => mutate({ variables: { email, password } }),
     }),
   }
 )(EnhancedForm);

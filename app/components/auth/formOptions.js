@@ -1,23 +1,20 @@
+// @flow
 import { signIn } from './util';
 import yup from 'yup';
 import { Actions } from 'react-native-router-flux';
 
-// password error message disappears incorrectly. Correct Yup.test()
-// registration is failing now, login is ok. Check server: https://launchpad.graphql.com/q815p14lp
+// @TODO: password error message disappears incorrectly, email verification is simplistic. Correct Yup.test()
 const createFormOptions = (signInForm = true) => {
   const handleSubmit = signInForm
     ? chooseSubmitMethod('login')
-    : chooseSubmitMethod('signUp');
+    : chooseSubmitMethod('signup');
   return {
     // Transform outer props into form values
     mapPropsToValues: props => ({ email: '', password: '' }),
     validationSchema: yup.object().shape({
       email: yup
         .string()
-        .email(
-          //? checks trim, standard regex
-          'Invalid email address'
-        )
+        .email('Invalid email address')
         .required(
           'To communicate we use your email, please ensure that it is correct'
         ),
@@ -50,7 +47,7 @@ const createFormOptions = (signInForm = true) => {
   };
 };
 
-const chooseSubmitMethod = method => (
+const chooseSubmitMethod = (method: 'login' | 'signup') => (
   { email, password },
   {
     props,
@@ -61,15 +58,19 @@ const chooseSubmitMethod = method => (
   props[method](email, password).then(
     ({ data }) => {
       setSubmitting(false);
-      console.log('hi');
       signIn(data[method].jwt);
       Actions.app();
     },
     error => {
       setSubmitting(false);
-      // If the error message contains email or password we'll assume that's the error.
+      // re-write server error messages
       if (/email/i.test(error.message)) {
-        setErrors({ email: 'The email is not found' });
+        method === 'login'
+          ? setErrors({ email: 'The email is not found' })
+          : setErrors({
+              email:
+                'This email is already in use. Did you forgot your password?',
+            });
       }
       if (/password/i.test(error.message)) {
         setErrors({ password: 'The password is incorrect' });

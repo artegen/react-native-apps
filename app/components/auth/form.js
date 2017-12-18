@@ -26,7 +26,7 @@ export default props => {
   } = props;
 
   console.log({ props });
-  // smth is triggering 1 additional re-render. Router?
+  // smth is triggering 1 additional re-render. Router? When pushing a route it only renders once, but when interacting with controls it logs twice at every event.
 
   return (
     <Container>
@@ -65,11 +65,17 @@ export default props => {
             touched.password && <Text style={s.error}>{errors.password}</Text>}
         </Form>
 
-        <Button full onPress={handleSubmit} disabled={isSubmitting}>
+        <Button
+          style={s.verticalMargin}
+          full
+          onPress={handleSubmit}
+          disabled={isSubmitting}
+        >
           {signIn ? <Text>Sign In</Text> : <Text>Sign Up</Text>}
         </Button>
         <TouchableHighlight
           style={s.link}
+          underlayColor="aliceblue"
           onPress={signIn ? Actions.register : Actions.login}
         >
           <Text style={s.linkText}>{signIn ? 'Sign Up' : 'Sign In'}</Text>
@@ -86,10 +92,14 @@ const s = StyleSheet.create({
     marginTop: 6,
   },
   link: {
-    padding: 5,
+    paddingVertical: 12,
   },
   linkText: {
     color: '#ff190c',
     letterSpacing: 1.3,
+    textAlign: 'center',
+  },
+  verticalMargin: {
+    marginTop: 24,
   },
 });

@@ -16,7 +16,9 @@ const authLink = setContext(async (req, { headers }) => {
 
   return {
     ...headers,
-    authorization: token ? `Bearer ${token}` : null,
+    headers: {
+      authorization: token ? `Bearer ${token}` : null,
+    },
   };
 });
 const link = authLink.concat(httpLink);

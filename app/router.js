@@ -20,6 +20,7 @@ const getSceneStyle = () => ({
   shadowRadius: 3,
 });
 
+// avoid flash of content at first load
 export default () => (
   <Router
     createReducer={reducerCreate}
